@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "Links" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "link" TEXT NOT NULL,
+    "visits" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
