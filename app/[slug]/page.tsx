@@ -12,6 +12,13 @@ const Redirect = async ({ params }: PageProps) => {
   const getLink = await prisma.links.findUnique({ where: { id: slug } });
   if (!getLink) return redirect("/");
 
+  await prisma.links.update({
+    data: { visits: getLink.visits + 1 },
+    where: {
+      id: slug,
+    },
+  });
+
   return redirect(getLink.link);
 };
 

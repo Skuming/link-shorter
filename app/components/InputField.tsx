@@ -8,9 +8,16 @@ import LinkImg from "@/public/link-45deg.svg";
 import ExclamationImg from "@/public/exclamation-lg.svg";
 import CheckImg from "@/public/check-lg.svg";
 
+interface Links {
+  link: string;
+  createdAt: Date | null;
+  original: string;
+  visits: number;
+}
+
 const InputField = () => {
   const [link, setLink] = useState<string | null>(null);
-  const [shortLink, setShortLink] = useState<string | null>(null);
+  const [shortLink, setShortLink] = useState<Links | null>(null);
   const [error, setError] = useState<boolean>(false);
 
   const onShorten = async () => {
@@ -33,7 +40,7 @@ const InputField = () => {
         localStorage.setItem("links", JSON.stringify(updatedLinks));
       }
 
-      return setShortLink(res.link);
+      return setShortLink(res);
     }
   };
 
@@ -45,16 +52,10 @@ const InputField = () => {
           placeholder="Link (http, https)"
           className="p-2 border border-zinc-700 rounded-xl w-full outline-none h-14 bg-[#19191D] placeholder:italic"
           onChange={(e) => setLink(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") onShorten();
+          }}
         />
-        {/* <button
-          className={`group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-neutral-950 px-6 font-medium text-neutral-200 transition hover:scale-110 ${
-            link ? "bg-blue-700/70" : "bg-blue-600/20"
-          }`}
-          disabled={link ? false : true}
-          onClick={() => onShorten()}
-        >
-          Shorter
-        </button> */}
         <button
           onClick={() => onShorten()}
           className="group relative inline-flex items-center rounded-xl justify-center overflow-hidden bg-neutral-950 px-8 font-medium text-neutral-200 transition hover:scale-105 cursor-pointer"
@@ -87,16 +88,28 @@ const InputField = () => {
             </div>
             <div className="flex gap-2">
               <div className="p-2 border border-zinc-700 rounded-xl w-full bg-zinc-800/50 flex items-center text-gray-400 text-xm">
-                {shortLink}
+                <a href={shortLink?.link} className="underline" target="_blank">
+                  {shortLink?.link}
+                </a>
               </div>
               <button
                 className="p-2 border border-zinc-700 rounded-xl cursor-pointer flex gap-2 md:w-fit w-full justify-center hover:bg-zinc-700 transition-all"
                 onClick={async () =>
-                  await navigator.clipboard.writeText(shortLink || "")
+                  await navigator.clipboard.writeText(shortLink?.link || "")
                 }
               >
                 Copy
               </button>
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <i className="text-gray-400 text-[12px] w-fit block">
+                Clicks: {shortLink?.visits}
+              </i>
+              <span className="p-0.5 bg-gray-400 rounded-full leading-1 h-0.5 w-0.5"></span>
+              <i className="text-gray-400 text-[12px] w-fit block">
+                {String(shortLink?.createdAt).substring(0, 10)}
+              </i>
             </div>
           </div>
         </div>
