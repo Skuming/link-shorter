@@ -25,6 +25,7 @@ const generateLink = async ({ link }: IGenerateLink) => {
     });
     const readyLink = `${process.env.DOMAIN}${genLink.id}`;
     return {
+      id: genLink.id,
       link: readyLink,
       createdAt: genLink.createdAt,
       original: genLink.link,
@@ -34,6 +35,7 @@ const generateLink = async ({ link }: IGenerateLink) => {
 
   const readyLink = `${process.env.DOMAIN}${existing.id}`;
   return {
+    id: existing.id,
     link: readyLink,
     createdAt: existing.createdAt,
     original: existing.link,
