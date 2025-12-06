@@ -9,6 +9,7 @@ import ExclamationImg from "@/public/exclamation-lg.svg";
 import CheckImg from "@/public/check-lg.svg";
 
 interface Links {
+  id: string;
   link: string;
   createdAt: Date | null;
   original: string;
@@ -58,7 +59,7 @@ const InputField = () => {
         />
         <button
           onClick={() => onShorten()}
-          className="group relative inline-flex items-center rounded-xl justify-center overflow-hidden bg-neutral-950 px-8 font-medium text-neutral-200 transition hover:scale-105 cursor-pointer"
+          className="group relative inline-flex items-center rounded-xl justify-center overflow-hidden bg-neutral-950 px-8 font-medium text-neutral-200 transition hover:scale-105 cursor-pointer py-4"
         >
           <span>Shorter</span>
           <div className="absolute inset-0 flex h-full w-full justify-center transform-[skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:transform-[skew(-12deg)_translateX(100%)]">
@@ -86,7 +87,7 @@ const InputField = () => {
               <Image src={LinkImg} alt="" className="mt-1"></Image>
               <p className="text-gray-400 text-xm">Shortened URL</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 md:flex-row flex-col">
               <div className="p-2 border border-zinc-700 rounded-xl w-full bg-zinc-800/50 flex items-center text-gray-400 text-xm">
                 <a href={shortLink?.link} className="underline" target="_blank">
                   {shortLink?.link}
