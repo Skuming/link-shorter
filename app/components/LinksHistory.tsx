@@ -182,7 +182,7 @@ const LinkHistory = () => {
           ))}
         </Activity>
         <div className="flex justify-center" onClick={() => setIsOpen(false)}>
-          <i className="text-gray-400 underline">Close</i>
+          <i className="text-gray-400 underline cursor-pointer">Close</i>
         </div>
       </Activity>
     </div>
