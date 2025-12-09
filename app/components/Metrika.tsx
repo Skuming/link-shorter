@@ -17,6 +17,7 @@ const Metrika = ({ children }: props) => {
         accurateTrackBounce: true,
         webvisor: true,
       }}
+      shouldUseAlternativeCDN={true}
     >
       {children}
     </YandexMetricaProvider>
