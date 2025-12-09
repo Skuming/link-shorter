@@ -13,7 +13,7 @@ import updateLink from "../actions/updateLink";
 interface Links {
   id: string;
   link: string;
-  createdAt: Date;
+  createdAt: Date | null;
   original: string;
   visits: number;
 }
@@ -44,7 +44,6 @@ const LinkHistory = () => {
 
   const updateLinkData = async (id: string) => {
     const updatedData = await updateLink(id);
-
     if (updatedData) {
       const storedLinks = localStorage.getItem("links");
       const linksArr = storedLinks ? JSON.parse(storedLinks) : null;

@@ -28,6 +28,7 @@ const InputField = () => {
         setShortLink(null);
         return setError(true);
       }
+      console.log(res);
       setError(false);
 
       const storedLinks = localStorage.getItem("links");
@@ -90,7 +91,7 @@ const InputField = () => {
             <div className="flex gap-2 md:flex-row flex-col">
               <div className="p-2 border border-zinc-700 rounded-xl w-full bg-zinc-800/50 flex items-center text-gray-400 text-xm">
                 <a href={shortLink?.link} className="underline" target="_blank">
-                  {shortLink?.link}
+                  {shortLink?.link.replace(/^https?:\/\//, "")}
                 </a>
               </div>
               <button
@@ -109,7 +110,7 @@ const InputField = () => {
               </i>
               <span className="p-0.5 bg-gray-400 rounded-full leading-1 h-0.5 w-0.5"></span>
               <i className="text-gray-400 text-[12px] w-fit block">
-                {String(shortLink?.createdAt).substring(0, 10)}
+                {String(shortLink?.createdAt?.toISOString().substring(0, 10))}
               </i>
             </div>
           </div>

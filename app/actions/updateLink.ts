@@ -13,7 +13,7 @@ const updateLink = async (id: string) => {
 
       return {
         id: updated.id,
-        createdAt: updated.createdAt,
+        createdAt: updated.createdAt?.toISOString(),
         link: readyLink,
         original: updated.link,
         visits: updated.visits,
