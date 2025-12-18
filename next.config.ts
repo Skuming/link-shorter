@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  generateBuildId: async () => {
+    return "link-shortener-v1";
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["ntgrd.link", "localhost:3000"],
+    },
+  },
+  output: "standalone",
 };
 
 export default nextConfig;
