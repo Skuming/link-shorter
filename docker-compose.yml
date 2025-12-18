@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: link-shortener
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      # Настоящий путь к БД для работы приложения
+      DATABASE_URL: "file:/app/db/prod.db"
+      DOMAIN: https://ntgrd.link/
+      NODE_ENV: "production"
+    volumes:
+      # Прокидываем папку prisma, чтобы файл dev.db сохранялся на сервере
+      - ./db-data:/app/db
